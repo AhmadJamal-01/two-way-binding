@@ -1,0 +1,76 @@
+Two-way binding in React refers to the synchronization of state between a component and its UI (user interface). It means that when the user interacts with the UI (e.g., input fields, checkboxes), the changes are automatically reflected in the component's state, and vice versa—when the state is updated programmatically, the UI automatically updates to reflect these changes. This concept is commonly used in frameworks like Angular, but in React, it's often implemented through controlled components.
+
+Here's a simple example to illustrate two-way binding in React:
+
+```jsx
+import React, { useState } from 'react';
+
+function TwoWayBindingExample() {
+  const [text, setText] = useState('');
+
+  const handleChange = (event) => {
+    setText(event.target.value); // Update state with input value
+  };
+
+  return (
+    <div>
+      <input type="text" value={text} onChange={handleChange} />
+      <p>The input value is: {text}</p>
+    </div>
+  );
+}
+
+export default TwoWayBindingExample;
+```
+
+In this example:
+
+1. **State Management**: The component uses `useState` to manage the `text` state.
+2. **Input Field**: The `value` of the input field is bound to the `text` state. This ensures that any change in the state will be reflected in the input field.
+3. **Event Handling**: The `onChange` event handler updates the state with the current value of the input field whenever the user types something. This ensures that any change in the input field is reflected in the state.
+4. **Display**: The current state is displayed in a `<p>` tag, showing real-time updates as the user types.
+
+This setup creates a two-way binding between the input field and the component's state. Any change in the input field updates the state, and any change in the state (though programmatic updates are not shown in this simple example) updates the input field.
+
+------------------------------------------------------------------------------------------------------
+QUESTION : WHY WE USE (E & EVENT) IN FUNCTION?
+
+In the context of React and JavaScript in general, `e` or `event` is commonly used as a parameter in event handler functions. These words represent the event object, which contains information about the event that just occurred. This object provides properties and methods that allow you to interact with and get details about the event.
+
+Here’s a brief overview of what the event object typically includes:
+
+1. **Event Type**: The type of event that occurred (e.g., `click`, `change`, `submit`).
+2. **Target Element**: The DOM element that triggered the event. This can be accessed using `event.target`.
+3. **Event Properties**: Various properties specific to the event, such as `event.key` for keyboard events or `event.clientX` and `event.clientY` for mouse events.
+4. **Methods**: Methods that can be called on the event object, such as `event.preventDefault()` to prevent the default action associated with the event or `event.stopPropagation()` to stop the event from bubbling up the DOM tree.
+
+Here’s a practical example using the `onChange` event in a controlled input component:
+
+```jsx
+import React, { useState } from 'react';
+
+function ExampleComponent() {
+  const [value, setValue] = useState('');
+
+  const handleChange = (event) => {
+    setValue(event.target.value); // Update state with input value
+  };
+
+  return (
+    <div>
+      <input type="text" value={value} onChange={handleChange} />
+      <p>Current value: {value}</p>
+    </div>
+  );
+}
+
+export default ExampleComponent;
+```
+
+In this example:
+
+- **Event Handler Function**: `handleChange` is an event handler function that takes `event` (often abbreviated as `e`) as a parameter.
+- **Event Object Usage**: `event.target` is the element that triggered the event (in this case, the input field). `event.target.value` retrieves the current value of the input field.
+- **State Update**: `setValue(event.target.value)` updates the state with the new input value.
+
+The use of `e` or `event` is a convention in JavaScript and helps make the code more readable and easier to understand for developers familiar with handling events.
